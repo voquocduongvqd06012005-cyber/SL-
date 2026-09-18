@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    viewport: width=device-width for responsive; initial-scale=1 ensures
+    1 CSS px = 1 physical reference px on all devices.
+    shrink-to-fit=no prevents legacy iOS auto-shrinking.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <meta name="description" content="STUDENT LIFE+ — Siêu Ứng Dụng AI Đồng Hành Cùng Sinh Viên. Tích hợp toàn diện 5 trụ cột HỌC - LÀM - SỐNG - KHỎE - NGHỆ. Giải quyết triệt để nỗi lo nhà trọ, học tập, việc làm và tài chính sinh viên Nghệ An." />
+  <meta name="keywords" content="Student Life+, sinh viên, ứng dụng sinh viên, AI học tập, nhà trọ sinh viên, việc làm sinh viên, Nghệ An, TECHFEST" />
+  <meta property="og:title" content="STUDENT LIFE+ — Siêu Ứng Dụng AI Đồng Hành Cùng Sinh Viên" />
+  <meta property="og:description" content="Giải quyết triệt để 5 nỗi đau sinh viên: Học - Làm - Sống - Khỏe - Nghệ." />
+  <meta property="og:type" content="website" />
+  <title>STUDENT LIFE+ | Siêu Ứng Dụng AI Dành Cho Sinh Viên</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- DNS prefetch for local assets folder -->
+  <link rel="dns-prefetch" href="/assets" />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!--
+    CRITICAL IMAGE RENDERING — Inline to apply before style.css parses.
+    These rules fire on first paint, eliminating any blur/aliasing flash.
+  -->
+  <style>
+    /* ─── 1. Global image sharpness — applied at earliest possible point ─── */
+    img {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      image-rendering: high-quality;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    /* ─── 2. Photos & PNG: let browser pick best downscale algorithm ─── */
+    img[src$=".jpg"], img[src$=".jpeg"],
+    img[src$=".png"], img[src$=".webp"] {
+      image-rendering: auto;
+      image-rendering: high-quality;
+    }
+
+    /* ─── 3. SVGs: geometric precision at all sizes ─── */
+    svg {
+      shape-rendering: geometricPrecision;
+      text-rendering: geometricPrecision;
+    }
+
+    /* ─── 4. Team avatars: crisp circle-clip on all screens ─── */
+    /*
+      TẤT CẢ 5 avatar dùng class: team-avatar img-hq avatar-portrait
+      Kích thước đồng nhất: 120 × 120 px CSS cho toàn bộ đội ngũ.
+      object-fit: cover → ảnh luôn lấp đầy khung tròn, không bị méo.
+    */
+    .team-avatar {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      object-position: center 12%; /* ưu tiên hiển thị khuôn mặt/nửa trên */
+    }
+
+    /* ─── 5. CSS phone mockup: GPU layer prevents sub-pixel blur ─── */
+    .css-phone, .phone-outer, .phone-inner {
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform;
+    }
+
+    /* ─── 6. Animated elements: prevent mid-animation rasterization blur ─── */
+    [class*="floating-badge"],
+    [class*="glow-ring"],
+    [class*="phone-particle"],
+    .team-avatar-ring {
+      /* GPU hints only — layout/visual props are in style.css */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo" id="nav-logo-link">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#0ea5e9"/>
+                <stop offset="50%" stop-color="#8b5cf6"/>
+                <stop offset="100%" stop-color="#ec4899"/>
+              </linearGradient>
+            </defs>
+            <rect width="32" height="32" rx="8" fill="url(#logoGrad)"/>
+            <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Inter" font-weight="900" font-size="14" fill="white">SL+</text>
+          </svg>
+        </div>
+        <span class="logo-text">Student<span class="logo-accent">Life+</span></span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#features" class="nav-link">Tính Năng</a></li>
+        <li><a href="#pillars" class="nav-link">5 Trụ Cột</a></li>
+        <li><a href="#partners" class="nav-link">Đối Tác</a></li>
+        <li><a href="#team" class="nav-link">Đội Ngũ</a></li>
+        <li><a href="#contact" class="nav-link">Liên Hệ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#cta" class="btn btn-primary btn-sm" id="nav-cta-btn">Tải App Ngay</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+      <div class="particles" id="particles"></div>
+    </div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge" id="hero-badge">
+          <span class="badge-icon">🏆</span>
+          <span>Dự án Khởi nghiệp Đổi mới Sáng tạo 2026</span>
+        </div>
+        <h1 class="hero-title" id="hero-title">
+          <span class="title-gradient">STUDENT LIFE+</span>
+          <br/>
+          <span class="title-sub">Siêu Ứng Dụng AI<br/>Đồng Hành Cùng Sinh Viên</span>
+        </h1>
+        <p class="hero-desc" id="hero-desc">
+          Tích hợp toàn diện <strong>5 trụ cột HỌC – LÀM – SỐNG – KHỎE – NGHỆ</strong>. Giải quyết triệt để nỗi lo nhà trọ, học tập, việc làm và tài chính sinh viên.
+        </p>
+        <div class="hero-cta" id="hero-cta">
+          <a href="#cta" class="btn btn-primary btn-lg" id="hero-download-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor" stroke="none"/></svg>
+            Tải App / Trải Nghiệm Ngay
+          </a>
+          <a href="#contact" class="btn btn-outline btn-lg" id="hero-business-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+            Dành cho Doanh Nghiệp & Chủ Trọ
+          </a>
+        </div>
+        <div class="hero-stats" id="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">5+</span>
+            <span class="stat-label">Trụ Cột Cốt Lõi</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Xác Thực eKYC</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">AI</span>
+            <span class="stat-label">Powered App</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" id="hero-visual">
+        <div class="phone-scene">
+          <!-- Ambient glow rings -->
+          <div class="glow-ring glow-ring-1"></div>
+          <div class="glow-ring glow-ring-2"></div>
+          <div class="glow-ring glow-ring-3"></div>
+
+          <!-- Floating feature badges -->
+          <div class="floating-badge fb-top-left" id="fb-study">
+            <span class="fb-icon">🎓</span>
+            <div class="fb-text">
+              <span class="fb-label">AI HỌC TẬP</span>
+              <span class="fb-val">Cá nhân hóa</span>
+            </div>
+          </div>
+          <div class="floating-badge fb-top-right" id="fb-job">
+            <span class="fb-icon">💼</span>
+            <div class="fb-text">
+              <span class="fb-label">VIỆC LÀM</span>
+              <span class="fb-val">100% kiểm duyệt</span>
+            </div>
+          </div>
+          <div class="floating-badge fb-bottom-left" id="fb-house">
+            <span class="fb-icon">🏠</span>
+            <div class="fb-text">
+              <span class="fb-label">NHÀ TRỌ</span>
+              <span class="fb-val">Xác thực thực địa</span>
+            </div>
+          </div>
+          <div class="floating-badge fb-bottom-right" id="fb-health">
+            <span class="fb-icon">🩺</span>
+            <div class="fb-text">
+              <span class="fb-label">SỨC KHỎE</span>
+              <span class="fb-val">Tâm lý & Thể chất</span>
+            </div>
+          </div>
+          <div class="floating-badge fb-mid-right" id="fb-culture">
+            <span class="fb-icon">🎨</span>
+            <div class="fb-text">
+              <span class="fb-label">VĂN HÓA NGHỆ</span>
+              <span class="fb-val">Di sản số</span>
+            </div>
+          </div>
+
+          <!-- CSS Phone Mockup -->
+          <div class="css-phone" id="css-phone">
+            <div class="phone-outer">
+              <!-- Side buttons -->
+              <div class="phone-btn-vol-up"></div>
+              <div class="phone-btn-vol-down"></div>
+              <div class="phone-btn-power"></div>
+              <div class="phone-inner">
+                <!-- Notch / Dynamic Island -->
+                <div class="phone-notch">
+                  <div class="notch-camera"></div>
+                </div>
+                <!-- App Screen Content -->
+                <div class="phone-screen">
+                  <!-- Status bar -->
+                  <div class="screen-statusbar">
+                    <span class="status-time">9:41</span>
+                    <div class="status-icons">
+                      <svg width="14" height="10" viewBox="0 0 14 10" fill="white"><rect x="0" y="3" width="2" height="7" rx="1" opacity="0.4"/><rect x="3" y="2" width="2" height="8" rx="1" opacity="0.6"/><rect x="6" y="1" width="2" height="9" rx="1" opacity="0.8"/><rect x="9" y="0" width="2" height="10" rx="1"/><rect x="12.5" y="2" width="1.5" height="6" rx="0.5" stroke="white" stroke-width="0.5" fill="none"/><rect x="13" y="3" width="0.8" height="4" rx="0.2" fill="white"/></svg>
+                      <svg width="14" height="10" viewBox="0 0 14 10" fill="white"><ellipse cx="7" cy="4" rx="6" ry="5" stroke="white" stroke-width="1.2" fill="none"/><path d="M1 6 Q7 1 13 6" stroke="white" stroke-width="1.2" fill="none"/><circle cx="7" cy="4" r="1.5" fill="white"/></svg>
+                      <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="white" stroke-width="1"/><rect x="21.5" y="3.5" width="2" height="5" rx="1" fill="white" opacity="0.7"/><rect x="2" y="2" width="16" height="8" rx="1.5" fill="#4ade80"/></svg>
+                    </div>
+                  </div>
+                  <!-- Header -->
+                  <div class="screen-header">
+                    <div class="screen-logo">
+                      <div class="screen-logo-icon">SL+</div>
+                      <div>
+                        <div class="screen-logo-name">Student Life+</div>
+                        <div class="screen-greeting">Xin chào, Sinh viên! 👋</div>
+                      </div>
+                    </div>
+                    <div class="screen-notif">
+                      <div class="notif-dot"></div>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </div>
+                  </div>
+                  <!-- AI Banner -->
+                  <div class="screen-ai-banner">
+                    <div class="ai-banner-icon">🤖</div>
+                    <div class="ai-banner-text">
+                      <div class="ai-banner-title">Trợ lý AI</div>
+                      <div class="ai-banner-sub">Sẵn sàng hỗ trợ bạn hôm nay</div>
+                    </div>
+                    <div class="ai-banner-arrow">→</div>
+                  </div>
+                  <!-- Feature Grid -->
+                  <div class="screen-feature-label">Khám phá</div>
+                  <div class="screen-features">
+                    <div class="screen-feat-card feat-blue">
+                      <span class="feat-emoji">🎓</span>
+                      <span class="feat-name">HỌC</span>
+                      <span class="feat-sub">AI Learning</span>
+                    </div>
+                    <div class="screen-feat-card feat-magenta">
+                      <span class="feat-emoji">💼</span>
+                      <span class="feat-name">LÀM</span>
+                      <span class="feat-sub">Safe Career</span>
+                    </div>
+                    <div class="screen-feat-card feat-yellow">
+                      <span class="feat-emoji">🏠</span>
+                      <span class="feat-name">SỐNG</span>
+                      <span class="feat-sub">Housing</span>
+                    </div>
+                    <div class="screen-feat-card feat-teal">
+                      <span class="feat-emoji">🩺</span>
+                      <span class="feat-name">KHỎE</span>
+                      <span class="feat-sub">HealthCare</span>
+                    </div>
+                    <div class="screen-feat-card feat-purple">
+                      <span class="feat-emoji">🎨</span>
+                      <span class="feat-name">NGHỆ</span>
+                      <span class="feat-sub">Culture</span>
+                    </div>
+                  </div>
+                  <!-- Activity -->
+                  <div class="screen-activity-label">Hoạt động gần đây</div>
+                  <div class="screen-activity">
+                    <div class="activity-item">
+                      <div class="activity-dot dot-blue"></div>
+                      <div class="activity-info">
+                        <span class="activity-title">Đề ôn thi AI tạo xong</span>
+                        <span class="activity-time">2 phút trước</span>
+                      </div>
+                      <span class="activity-badge">Mới</span>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-dot dot-magenta"></div>
+                      <div class="activity-info">
+                        <span class="activity-title">3 việc làm phù hợp</span>
+                        <span class="activity-time">1 giờ trước</span>
+                      </div>
+                    </div>
+                    <div class="activity-item">
+                      <div class="activity-dot dot-yellow"></div>
+                      <div class="activity-info">
+                        <span class="activity-title">Phòng trọ gần trường</span>
+                        <span class="activity-time">Hôm nay</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Bottom nav -->
+                  <div class="screen-bottom-nav">
+                    <div class="bnav-item bnav-active">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                      <span>Trang chủ</span>
+                    </div>
+                    <div class="bnav-item">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                      <span>Tìm kiếm</span>
+                    </div>
+                    <div class="bnav-item">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      <span>Hồ sơ</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Floating particles around phone -->
+          <div class="phone-particle pp-1"></div>
+          <div class="phone-particle pp-2"></div>
+          <div class="phone-particle pp-3"></div>
+          <div class="phone-particle pp-4"></div>
+          <div class="phone-particle pp-5"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-dot"></div>
+      <span>Khám phá ngay</span>
+    </div>
+  </section>
+
+  <!-- ===== PAIN POINTS SECTION ===== -->
+  <section class="pain-points" id="pain-points">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Vấn đề thực tế</span>
+        <h2 class="section-title">3 Nỗi Đau Lớn Nhất<br/><span class="gradient-text">Của Sinh Viên Việt Nam</span></h2>
+        <p class="section-desc">Mỗi ngày, hàng triệu sinh viên đang vật lộn với những vấn đề chưa có lời giải thấu đáo.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card" id="pain-card-1">
+          <div class="pain-icon pain-icon-red">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Học liệu phân mảnh</h3>
+          <p>Tài liệu rải rác, không hệ thống. Sinh viên mất hàng giờ tìm kiếm đề thi, giáo trình trên các nền tảng khác nhau. <strong>Năng suất học tập thấp, stress cao.</strong></p>
+          <div class="pain-stat">
+            <span class="pain-number">73%</span>
+            <span>sinh viên khó tìm tài liệu chất lượng</span>
+          </div>
+        </div>
+        <div class="pain-card pain-card-featured" id="pain-card-2">
+          <div class="pain-icon pain-icon-magenta">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" stroke-width="2"/><line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="pain-badge">Nguy hiểm nhất</div>
+          <h3 style="color: aliceblue;">Bẫy lừa đảo việc làm đa cấp</h3>
+          <p>Hàng nghìn sinh viên mỗi năm bị lừa vào các mô hình đa cấp, việc làm "ảo" không được kiểm chứng. <strong>Mất tiền, mất thời gian, tổn hại tâm lý.</strong></p>
+          <div class="pain-stat">
+            <span class="pain-number">48%</span>
+            <span>sinh viên từng gặp tin tuyển dụng lừa đảo</span>
+          </div>
+        </div>
+        <div class="pain-card" id="pain-card-3">
+          <div class="pain-icon pain-icon-yellow">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2"/><polyline points="9 22 9 12 15 12 15 22" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <h3>Nhà trọ loạn giá, thiếu minh bạch</h3>
+          <p>Thị trường phòng trọ không có cơ chế xác thực. Sinh viên dễ bị chặt chém, phòng không đúng mô tả, chủ nhà thiếu trách nhiệm. <strong>Rỗng túi cuối tháng.</strong></p>
+          <div class="pain-stat">
+            <span class="pain-number">65%</span>
+            <span>sinh viên gặp vấn đề với nhà trọ năm đầu</span>
+          </div>
+        </div>
+      </div>
+      <div class="solution-banner" id="solution-banner">
+        <div class="solution-icon">✨</div>
+        <div class="solution-text">
+          <strong>Giải pháp All-in-One:</strong> Student Life+ xác thực <span class="highlight-blue">100% thông tin</span>, ứng dụng AI chặn lừa đảo thông minh, bảo vệ quyền lợi tối đa cho mọi sinh viên.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5 PILLARS SECTION ===== -->
+  <section class="pillars" id="pillars">
+    <div class="pillars-bg">
+      <div class="pillars-orb pillars-orb-1"></div>
+      <div class="pillars-orb pillars-orb-2"></div>
+    </div>
+    <div class="container">
+      <div class="section-header section-header-light">
+        <span class="section-tag section-tag-light">Hệ sinh thái cốt lõi</span>
+        <h2 class="section-title light">5 Trụ Cột<br/><span class="gradient-text-light">Sức Mạnh Sinh Viên</span></h2>
+        <p class="section-desc light">Một nền tảng duy nhất — Giải quyết toàn diện mọi nhu cầu của cuộc sống sinh viên hiện đại.</p>
+      </div>
+      <div class="pillars-grid">
+        <!-- Pillar 1: HOC -->
+        <div class="pillar-card" id="pillar-hoc" data-color="blue">
+          <div class="pillar-glow glow-blue"></div>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap icon-blue">
+              <span class="pillar-emoji">🎓</span>
+            </div>
+            <div>
+              <div class="pillar-tag tag-blue">Trụ cột 01</div>
+              <h3 class="pillar-title">HỌC</h3>
+              <p class="pillar-subtitle">Smart AI Learning</p>
+            </div>
+          </div>
+          <ul class="pillar-features">
+            <li>
+              <svg class="feature-check check-blue" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Trợ lý AI cá nhân hóa: tóm tắt slide, tạo đề ôn thi trắc nghiệm tự động</span>
+            </li>
+            <li>
+              <svg class="feature-check check-blue" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Kho học liệu số tập trung: giáo trình, đề thi các năm của mọi trường</span>
+            </li>
+            <li>
+              <svg class="feature-check check-blue" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Hệ thống khóa học Online/Offline đa dạng, đối tác các giảng viên hàng đầu</span>
+            </li>
+          </ul>
+          <div class="pillar-footer">
+            <span class="pillar-tag-badge badge-blue">AI-Powered</span>
+            <span class="pillar-tag-badge badge-blue">Personalized</span>
+          </div>
+        </div>
+
+        <!-- Pillar 2: LAM -->
+        <div class="pillar-card" id="pillar-lam" data-color="magenta">
+          <div class="pillar-glow glow-magenta"></div>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap icon-magenta">
+              <span class="pillar-emoji">💼</span>
+            </div>
+            <div>
+              <div class="pillar-tag tag-magenta">Trụ cột 02</div>
+              <h3 class="pillar-title">LÀM</h3>
+              <p class="pillar-subtitle">Safe Career & FDI Matching</p>
+            </div>
+          </div>
+          <ul class="pillar-features">
+            <li>
+              <svg class="feature-check check-magenta" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Sàn việc làm 100% kiểm duyệt qua eKYC, AI chặn lừa đảo đa cấp</span>
+            </li>
+            <li>
+              <svg class="feature-check check-magenta" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Kết nối thực tập chất lượng: KCN WHA, VSIP Nghệ An và 500+ doanh nghiệp FDI</span>
+            </li>
+            <li>
+              <svg class="feature-check check-magenta" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Hồ sơ năng lực số tích hợp QR code, chuyên nghiệp như CV quốc tế</span>
+            </li>
+          </ul>
+          <div class="pillar-footer">
+            <span class="pillar-tag-badge badge-magenta">Anti-Scam</span>
+            <span class="pillar-tag-badge badge-magenta">FDI Network</span>
+          </div>
+        </div>
+
+        <!-- Pillar 3: SONG -->
+        <div class="pillar-card" id="pillar-song" data-color="yellow">
+          <div class="pillar-glow glow-yellow"></div>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap icon-yellow">
+              <span class="pillar-emoji">🏠</span>
+            </div>
+            <div>
+              <div class="pillar-tag tag-yellow">Trụ cột 03</div>
+              <h3 class="pillar-title">SỐNG</h3>
+              <p class="pillar-subtitle">Verified Housing & Smart Finance</p>
+            </div>
+          </div>
+          <ul class="pillar-features">
+            <li>
+              <svg class="feature-check check-yellow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Bản đồ phòng trọ an toàn, xác thực 100% thực địa, Virtual Tour 360°</span>
+            </li>
+            <li>
+              <svg class="feature-check check-yellow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Trợ lý AI quản lý tài chính cá nhân, cảnh báo vượt ngân sách theo thời gian thực</span>
+            </li>
+            <li>
+              <svg class="feature-check check-yellow" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Thẻ định danh số sinh viên nhận ưu đãi độc quyền F&B, giải trí toàn thành phố</span>
+            </li>
+          </ul>
+          <div class="pillar-footer">
+            <span class="pillar-tag-badge badge-yellow">Verified 360°</span>
+            <span class="pillar-tag-badge badge-yellow">FinTech AI</span>
+          </div>
+        </div>
+
+        <!-- Pillar 4: KHOE -->
+        <div class="pillar-card" id="pillar-khoe" data-color="teal">
+          <div class="pillar-glow glow-teal"></div>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap icon-teal">
+              <span class="pillar-emoji">🩺</span>
+            </div>
+            <div>
+              <div class="pillar-tag tag-teal">Trụ cột 04</div>
+              <h3 class="pillar-title">KHỎE</h3>
+              <p class="pillar-subtitle">Mental & Physical Care</p>
+            </div>
+          </div>
+          <ul class="pillar-features">
+            <li>
+              <svg class="feature-check check-teal" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Bài test tâm lý chuẩn y khoa đo lường mức độ stress/lo âu học đường</span>
+            </li>
+            <li>
+              <svg class="feature-check check-teal" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Gợi ý phòng gym, lịch tập thể chất cá nhân hóa theo thể trạng sinh viên</span>
+            </li>
+            <li>
+              <svg class="feature-check check-teal" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Đặt lịch khám sức khỏe trực tuyến nhanh chóng, kết nối trực tiếp bệnh viện</span>
+            </li>
+          </ul>
+          <div class="pillar-footer">
+            <span class="pillar-tag-badge badge-teal">MedTech</span>
+            <span class="pillar-tag-badge badge-teal">WellBeing AI</span>
+          </div>
+        </div>
+
+        <!-- Pillar 5: NGHE -->
+        <div class="pillar-card pillar-card-wide" id="pillar-nghe" data-color="purple">
+          <div class="pillar-glow glow-purple"></div>
+          <div class="pillar-header">
+            <div class="pillar-icon-wrap icon-purple">
+              <span class="pillar-emoji">🎨</span>
+            </div>
+            <div>
+              <div class="pillar-tag tag-purple">Trụ cột 05</div>
+              <h3 class="pillar-title">NGHỆ</h3>
+              <p class="pillar-subtitle">Digital Cultural & Heritage Ecosystem</p>
+            </div>
+          </div>
+          <ul class="pillar-features pillar-features-grid">
+            <li>
+              <svg class="feature-check check-purple" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Bảo tàng số & Thư viện di sản văn hóa Nghệ An (Ví, Giặm, Kim Liên...)</span>
+            </li>
+            <li>
+              <svg class="feature-check check-purple" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Sàn giao dịch sản phẩm nghệ thuật/thiết kế số dành riêng cho sinh viên sáng tạo</span>
+            </li>
+            <li>
+              <svg class="feature-check check-purple" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>"Lớp học mở" AI tương tác di sản & Lịch trình du lịch/phượt thông minh</span>
+            </li>
+          </ul>
+          <div class="pillar-footer">
+            <span class="pillar-tag-badge badge-purple">Heritage Digital</span>
+            <span class="pillar-tag-badge badge-purple">Culture AI</span>
+            <span class="pillar-tag-badge badge-purple">Creative Market</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECH ADVANTAGES SECTION ===== -->
+  <section class="tech-advantages" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Công nghệ vượt trội</span>
+        <h2 class="section-title">4 Lợi Thế Công Nghệ<br/><span class="gradient-text">Độc Nhất Thị Trường</span></h2>
+        <p class="section-desc">Không chỉ là ứng dụng thông thường — Student Life+ là nền tảng AI bảo vệ sinh viên toàn diện.</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card" id="tech-card-1">
+          <div class="tech-icon-wrap">
+            <div class="tech-icon-bg bg-blue">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="tech-medal">🥇</div>
+          </div>
+          <h3>Tất Cả Trong Một</h3>
+          <p class="tech-desc">Super App All-in-One — Không cần cài đặt 10 ứng dụng khác nhau. Một app duy nhất phục vụ toàn bộ hành trình sinh viên từ ngày nhập học đến tốt nghiệp.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">Super App</span>
+            <span class="tech-tag">All-in-One</span>
+          </div>
+        </div>
+
+        <div class="tech-card tech-card-featured" id="tech-card-2">
+          <div class="tech-icon-wrap">
+            <div class="tech-icon-bg bg-magenta">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 2a4 4 0 014 4v2h2a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h2V6a4 4 0 014-4z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="15" r="2" stroke="currentColor" stroke-width="2"/></svg>
+            </div>
+            <div class="tech-medal">🤖</div>
+          </div>
+          <h3>Trí Tuệ Nhân Tạo AI/ML</h3>
+          <p class="tech-desc">Tích hợp sâu AI/ML vào mọi tính năng: học tập cá nhân hóa, gợi ý công việc phù hợp, phân tích tài chính, cảnh báo sức khỏe tâm thần theo thời gian thực.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">NLP</span>
+            <span class="tech-tag">Computer Vision</span>
+            <span class="tech-tag">Recommender AI</span>
+          </div>
+        </div>
+
+        <div class="tech-card" id="tech-card-3">
+          <div class="tech-icon-wrap">
+            <div class="tech-icon-bg bg-yellow">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="tech-medal">🛡️</div>
+          </div>
+          <h3>Xác Thực eKYC + OCR</h3>
+          <p class="tech-desc">Công nghệ xác thực danh tính điện tử eKYC kết hợp OCR mã hóa, đảm bảo 100% thông tin người dùng, nhà tuyển dụng và chủ trọ đều được kiểm chứng thực địa.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">eKYC</span>
+            <span class="tech-tag">OCR</span>
+            <span class="tech-tag">Anti-Fraud</span>
+          </div>
+        </div>
+
+        <div class="tech-card" id="tech-card-4">
+          <div class="tech-icon-wrap">
+            <div class="tech-icon-bg bg-purple">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="tech-medal">🔒</div>
+          </div>
+          <h3>Bảo Hộ Bản Quyền Độc Quyền</h3>
+          <p class="tech-desc">Nhãn hiệu và bản quyền được bảo hộ pháp lý toàn diện. Hệ sinh thái dữ liệu tuân thủ nghiêm ngặt Luật An ninh mạng và GDPR về bảo vệ thông tin cá nhân.</p>
+          <div class="tech-tags">
+            <span class="tech-tag">IP Protected</span>
+            <span class="tech-tag">GDPR Compliant</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARTNERS SECTION ===== -->
+  <section class="partners" id="partners">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Hệ sinh thái đồng hành</span>
+        <h2 class="section-title">Đối Tác & Cộng Đồng<br/><span class="gradient-text">Tin Tưởng Student Life+</span></h2>
+        <p class="section-desc">Mạng lưới đối tác trường đại học, doanh nghiệp và khu công nghiệp hàng đầu Nghệ An.</p>
+      </div>
+      <div class="partners-tabs" id="partners-tabs">
+        <button class="tab-btn tab-active" data-tab="universities" id="tab-universities">🎓 Trường ĐH / CĐ</button>
+        <button class="tab-btn" data-tab="enterprise" id="tab-enterprise">🏭 Doanh Nghiệp & KCN</button>
+        <button class="tab-btn" data-tab="ambassador" id="tab-ambassador">⭐ Đại Sứ Sinh Viên</button>
+      </div>
+      <div class="partners-content">
+        <div class="partner-tab-panel active" data-panel="universities" id="panel-universities">
+          <div class="partners-grid">
+            <div class="partner-logo-card" id="partner-dh-vinh">
+              <div class="partner-logo-icon">🎓</div>
+              <span></span>
+            </div>
+            <div class="partner-logo-card" id="partner-yk-vinh">
+              <div class="partner-logo-icon">🏥</div>
+              <span>ĐH Y khoa Vinh</span>
+            </div>
+            <div class="partner-logo-card" id="partner-kt-na">
+              <div class="partner-logo-icon">📊</div>
+              <span>ĐH Kinh tế Nghệ An</span>
+            </div>
+            <div class="partner-logo-card" id="partner-cd-sp">
+              <div class="partner-logo-icon">📚</div>
+              <span>CĐ Sư phạm Nghệ An</span>
+            </div>
+            <div class="partner-logo-card" id="partner-viet-han">
+              <div class="partner-logo-icon">🌏</div>
+              <span>CĐ Việt - Hàn Nghệ An</span>
+            </div>
+            <div class="partner-logo-card" id="partner-more-school">
+              <div class="partner-logo-icon">+</div>
+              <span>Và nhiều trường khác...</span>
+            </div>
+          </div>
+        </div>
+        <div class="partner-tab-panel" data-panel="enterprise" id="panel-enterprise">
+          <div class="partners-grid">
+            <div class="partner-logo-card" id="partner-wha">
+              <div class="partner-logo-icon">🏗️</div>
+              <span>KCN WHA Nghệ An</span>
+            </div>
+            <div class="partner-logo-card" id="partner-vsip">
+              <div class="partner-logo-icon">🏭</div>
+              <span>VSIP Nghệ An</span>
+            </div>
+            <div class="partner-logo-card" id="partner-so-khcn">
+              <div class="partner-logo-icon">⚗️</div>
+              <span>Sở KH&CN Nghệ An</span>
+            </div>
+            <div class="partner-logo-card" id="partner-fdi">
+              <div class="partner-logo-icon">🌐</div>
+              <span>500+ Doanh nghiệp FDI</span>
+            </div>
+            <div class="partner-logo-card" id="partner-startup">
+              <div class="partner-logo-icon">🚀</div>
+              <span>Hệ sinh thái Startup</span>
+            </div>
+            <div class="partner-logo-card" id="partner-more-biz">
+              <div class="partner-logo-icon">+</div>
+              <span>Đang mở rộng...</span>
+            </div>
+          </div>
+        </div>
+        <div class="partner-tab-panel" data-panel="ambassador" id="panel-ambassador">
+          <div class="ambassador-content">
+            <div class="ambassador-visual">
+              <div class="ambassador-map">
+                <div class="map-dot md-1 pulse-blue">●</div>
+                <div class="map-dot md-2 pulse-magenta">●</div>
+                <div class="map-dot md-3 pulse-yellow">●</div>
+                <div class="map-dot md-4 pulse-blue">●</div>
+                <div class="map-dot md-5 pulse-magenta">●</div>
+              </div>
+              <div class="ambassador-stats-grid">
+                <div class="amb-stat">
+                  <span class="amb-number">5+</span>
+                  <span class="amb-label">Trường tham gia</span>
+                </div>
+                <div class="amb-stat">
+                  <span class="amb-number">50+</span>
+                  <span class="amb-label">Đại sứ sinh viên</span>
+                </div>
+                <div class="amb-stat">
+                  <span class="amb-number">1000+</span>
+                  <span class="amb-label">Sinh viên kết nối</span>
+                </div>
+              </div>
+            </div>
+            <div class="ambassador-text">
+              <h3>Mạng Lưới Đại Sứ Campus</h3>
+              <p>Đội ngũ Ambassador sinh viên năng động, phủ rộng tại các trường Đại học/Cao đẳng trên địa bàn Nghệ An. Họ là những người kết nối cộng đồng, lan tỏa giá trị Student Life+ đến từng sinh viên.</p>
+              <a href="#cta" class="btn btn-primary" id="join-ambassador-btn">Trở thành Đại Sứ Campus →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEAM SECTION ===== -->
+  <section class="team" id="team">
+    <div class="team-bg">
+      <div class="team-orb team-orb-1"></div>
+      <div class="team-orb team-orb-2"></div>
+    </div>
+    <div class="container">
+      <div class="section-header section-header-light">
+        <span class="section-tag section-tag-light">Những người kiến tạo</span>
+        <h2 class="section-title light">Đội Ngũ Sáng Lập<br/><span class="gradient-text-light">Trẻ, Tài Năng & Đam Mê</span></h2>
+        <p class="section-desc light">Được dẫn dắt bởi những sinh viên đầy nhiệt huyết, được cố vấn bởi các Tiến sĩ và Giảng viên đầu ngành về Kinh tế số & AI.</p>
+      </div>
+      <div class="team-grid">
+        <!-- ─── THÀNH VIÊN 1: Nguyễn Phương Nguyên (CEO) ─── -->
+        <div class="team-card" id="team-card-1">
+          <div class="team-avatar-wrap">
+            <!--
+              Nguyen.jpg: 1706 × 2560 px portrait (gốc)
+              Hiển thị 120px CSS → downscale 14× → sắc nét hoàn toàn
+            -->
+            <img
+              src="assets/Nguyen.jpg"
+              srcset="assets/Nguyen.jpg 1706w"
+              sizes="120px"
+              alt="Nguyễn Phương Nguyên - CEO, Giám đốc Dự án"
+              class="team-avatar img-hq avatar-portrait"
+              width="1706"
+              height="2560"
+              decoding="async"
+              fetchpriority="low"
+              loading="lazy"
+            />
+            <div class="team-avatar-ring ring-blue"></div>
+          </div>
+          <div class="team-info">
+            <h4>Nguyễn Phương Nguyên</h4>
+            <div class="team-role role-blue">
+              <span class="role-badge">CEO</span>
+              Giám đốc Dự án
+            </div>
+            <p class="team-desc">Người sáng lập & dẫn dắt tầm nhìn chiến lược của Student Life+</p>
+          </div>
+        </div>
+
+        <!-- ─── THÀNH VIÊN 2: Lê Thị Ly (COO) ─── -->
+        <div class="team-card" id="team-card-2">
+          <div class="team-avatar-wrap">
+            <!--
+              Ly.jpg: 1086 × 1448 px portrait (gốc)
+              Hiển thị 120px CSS → downscale 9× → sắc nét hoàn toàn
+            -->
+            <img
+              src="assets/Ly.jpg"
+              srcset="assets/Ly.jpg 1086w"
+              sizes="120px"
+              alt="Lê Thị Ly - COO, Giám đốc Vận hành"
+              class="team-avatar img-hq avatar-portrait"
+              width="1086"
+              height="1448"
+              decoding="async"
+              fetchpriority="low"
+              loading="lazy"
+            />
+            <div class="team-avatar-ring ring-magenta"></div>
+          </div>
+          <div class="team-info">
+            <h4>Lê Thị Ly</h4>
+            <div class="team-role role-magenta">
+              <span class="role-badge">COO</span>
+              Giám đốc Vận hành
+            </div>
+            <p class="team-desc">Điều phối và tối ưu hoạt động vận hành toàn bộ hệ sinh thái</p>
+          </div>
+        </div>
+
+        <!-- ─── THÀNH VIÊN 3: Nguyễn Thị Quỳnh Anh (CFO) ─── -->
+        <div class="team-card" id="team-card-3">
+          <div class="team-avatar-wrap">
+            <!--
+              Anh.jpg: 1024 × 1536 px portrait (gốc)
+              Hiển thị 120px CSS → downscale 8.5× → sắc nét hoàn toàn
+            -->
+            <img
+              src="assets/Anh.jpg"
+              srcset="assets/Anh.jpg 1024w"
+              sizes="120px"
+              alt="Nguyễn Thị Quỳnh Anh - CFO, Giám đốc Tài chính"
+              class="team-avatar img-hq avatar-portrait"
+              width="1024"
+              height="1536"
+              decoding="async"
+              fetchpriority="low"
+              loading="lazy"
+            />
+            <div class="team-avatar-ring ring-teal"></div>
+          </div>
+          <div class="team-info">
+            <h4>Nguyễn Thị Quỳnh Anh</h4>
+            <div class="team-role role-teal">
+              <span class="role-badge">CFO</span>
+              Giám đốc Tài chính
+            </div>
+            <p class="team-desc">Hoạch định chiến lược tài chính và mô hình kinh doanh bền vững</p>
+          </div>
+        </div>
+
+        <!-- ─── THÀNH VIÊN 4: Trần Thị Ngọc Bé (CCO) ─── -->
+        <div class="team-card" id="team-card-5">
+          <div class="team-avatar-wrap">
+            <!--
+              Be.jpg: 832 × 1248 px portrait (gốc)
+              Hiển thị 120px CSS → downscale 6.9× → sắc nét hoàn toàn
+            -->
+            <img
+              src="assets/Be.jpg"
+              srcset="assets/Be.jpg 832w"
+              sizes="120px"
+              alt="Nguyễn Tùng Lâm - CCO, Giám đốc Kinh doanh"
+              class="team-avatar img-hq avatar-portrait"
+              width="832"
+              height="1248"
+              decoding="async"
+              fetchpriority="low"
+              loading="lazy"
+            />
+            <div class="team-avatar-ring ring-magenta"></div>
+          </div>
+          <div class="team-info">
+            <h4>Trần Thị Ngọc Bé</h4>
+            <div class="team-role role-magenta">
+              <span class="role-badge">CCO</span>
+              Giám đốc Kinh doanh
+            </div>
+            <p class="team-desc">Phát triển mối quan hệ đối tác và mô hình kinh doanh đa dạng</p>
+          </div>
+        </div>
+
+        <!-- ─── THÀNH VIÊN 5: Võ Quốc Dương (CTO) ─── -->
+        <div class="team-card" id="team-card-6">
+          <div class="team-avatar-wrap">
+            <!--
+              Duong.jpg: 354 × 472 px (gốc)
+              Hiển thị 120px CSS → 1x: downscale OK, 2x: nhẹ upscale ~1.35×
+              filter: contrast+sharpen compensates. Kích thước đồng nhất với nhóm.
+              Khuyến nghị: thay bằng ảnh ≥ 480px để sắc nét hoàn toàn trên Retina.
+            -->
+            <img
+              src="assets/Duong.jpg"
+              srcset="assets/Duong.jpg 354w"
+              sizes="120px"
+              alt="Võ Quốc Dương - CTO, Giám đốc Công nghệ"
+              class="team-avatar img-hq avatar-portrait"
+              width="354"
+              height="472"
+              decoding="async"
+              fetchpriority="low"
+              loading="lazy"
+            />
+            <div class="team-avatar-ring ring-blue"></div>
+          </div>
+          <div class="team-info">
+            <h4>Võ Quốc Dương</h4>
+            <div class="team-role role-blue">
+              <span class="role-badge">CTO</span>
+              Giám đốc Công nghệ
+            </div>
+            <p class="team-desc">Kiến trúc sư kỹ thuật, xây dựng hạ tầng AI và hệ thống bảo mật</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="advisor-banner" id="advisor-banner">
+        <div class="advisor-icon">👨‍🏫</div>
+        <p><strong>Cố vấn chuyên môn:</strong> Được đồng hành và cố vấn bởi các <strong>Tiến sĩ, Giảng viên đầu ngành</strong> về Kinh tế số, Khoa học Máy tính và Trí tuệ nhân tạo tại các trường  và ĐH Y khoa Vinh.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DEMO PLATFORM SECTION ===== -->
+  <section class="demo-platform" id="demo-platform">
+    <div class="demo-bg">
+      <div class="demo-orb demo-orb-1"></div>
+      <div class="demo-orb demo-orb-2"></div>
+      <div class="demo-orb demo-orb-3"></div>
+      <div class="demo-grid-lines"></div>
+    </div>
+    <div class="container">
+      <!-- Section Header -->
+      <div class="section-header section-header-light reveal">
+        <span class="section-tag section-tag-light">🚀 Live Demo · Trải nghiệm trực tiếp</span>
+        <h2 class="section-title light">TRẢI NGHIỆM NỀN TẢNG<br/><span class="gradient-text-light">STUDENT LIFE+</span></h2>
+        <p class="section-desc light">Khám phá ngay các tính năng <strong style="color:rgba(255,255,255,0.9)">Học – Làm – Sống – Khỏe – Nghệ</strong> trực tiếp trên trình duyệt — không cần cài đặt.</p>
+      </div>
+
+      <!-- App Window Frame -->
+      <div class="demo-window reveal" id="demo-window">
+        <!-- Window Chrome / Title Bar -->
+        <div class="demo-titlebar">
+          <div class="demo-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <div class="demo-titlebar-text">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="6" fill="url(#demoLogoG)"/><defs><linearGradient id="demoLogoG" x1="0" y1="0" x2="24" y2="24"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#ec4899"/></linearGradient></defs><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Inter" font-weight="900" font-size="9" fill="white">SL+</text></svg>
+            Student Life+ · Nền tảng Demo
+          </div>
+        </div>
+
+        <!-- Pillar Tab Navigation -->
+        <div class="demo-tabs" id="demo-tabs" role="tablist" aria-label="Chọn phân hệ">
+          <button class="demo-tab demo-tab-active" data-pillar="hoc" id="tab-hoc" role="tab" aria-selected="true" aria-controls="panel-hoc">
+            <span class="tab-emoji">📚</span>
+            <span class="tab-label">HỌC</span>
+          </button>
+          <button class="demo-tab" data-pillar="lam" id="tab-lam" role="tab" aria-selected="false" aria-controls="panel-lam">
+            <span class="tab-emoji">💼</span>
+            <span class="tab-label">LÀM</span>
+          </button>
+          <button class="demo-tab" data-pillar="song" id="tab-song" role="tab" aria-selected="false" aria-controls="panel-song">
+            <span class="tab-emoji">🏡</span>
+            <span class="tab-label">SỐNG</span>
+          </button>
+          <button class="demo-tab" data-pillar="khoe" id="tab-khoe" role="tab" aria-selected="false" aria-controls="panel-khoe">
+            <span class="tab-emoji">🏃</span>
+            <span class="tab-label">KHỎE</span>
+          </button>
+          <button class="demo-tab" data-pillar="nghe" id="tab-nghe" role="tab" aria-selected="false" aria-controls="panel-nghe">
+            <span class="tab-emoji">🎨</span>
+            <span class="tab-label">NGHỆ</span>
+          </button>
+          <!-- Active indicator slider -->
+          <div class="demo-tab-indicator" id="demo-tab-indicator"></div>
+        </div>
+
+        <!-- Demo Content Area -->
+        <div class="demo-content-area" id="demo-content-area">
+
+          <!-- ── PANEL 1: HỌC ── -->
+          <div class="demo-panel demo-panel-active" id="panel-hoc" role="tabpanel" aria-labelledby="tab-hoc" data-color="blue">
+            <div class="demo-panel-inner">
+              <!-- Left sidebar: Search -->
+              <div class="demo-sidebar">
+                <div class="demo-search-bar">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                  <input type="text" placeholder="Tìm tài liệu, gia sư..." id="hoc-search" aria-label="Tìm kiếm học liệu" readonly/>
+                </div>
+                <div class="demo-filter-tags">
+                  <span class="filter-tag filter-active">Tất cả</span>
+                  <span class="filter-tag">Tài liệu</span>
+                  <span class="filter-tag">Gia sư</span>
+                  <span class="filter-tag">Khóa học</span>
+                  <span class="filter-tag">Đề thi</span>
+                </div>
+                <div class="demo-ai-suggest">
+                  <div class="ai-chip">
+                    <span>🤖</span>
+                    <span>AI gợi ý theo lịch học của bạn</span>
+                  </div>
+                </div>
+                <ul class="demo-list">
+                  <li class="demo-list-item demo-list-item-active">
+                    <div class="dli-icon" style="background:rgba(14,165,233,0.15)">📄</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Giáo trình CNTT K66</span>
+                      <span class="dli-meta">ĐH Vinh · 428 tải xuống</span>
+                    </div>
+                    <span class="dli-badge badge-blue">Mới</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(139,92,246,0.15)">🎓</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Gia sư Toán Giải tích</span>
+                      <span class="dli-meta">4.9★ · 85 buổi đã dạy</span>
+                    </div>
+                    <span class="dli-badge badge-purple">Trực tuyến</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(20,184,166,0.15)">📝</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Đề thi Kinh tế vĩ mô 2025</span>
+                      <span class="dli-meta">Có đáp án · PDF</span>
+                    </div>
+                    <span class="dli-badge badge-teal">Free</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(234,179,8,0.15)">🎬</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Khóa học AI cơ bản</span>
+                      <span class="dli-meta">12 video · 6h 30m</span>
+                    </div>
+                    <span class="dli-badge badge-yellow">Hot</span>
+                  </li>
+                </ul>
+              </div>
+              <!-- Right: Feature Cards -->
+              <div class="demo-main-panel">
+                <div class="demo-panel-header">
+                  <h3 class="demo-panel-title">📚 Trợ lý Học tập AI</h3>
+                  <span class="demo-panel-subtitle">Cá nhân hóa theo tiến độ của bạn</span>
+                </div>
+                <div class="demo-feature-grid">
+                  <div class="demo-feat-card dfc-blue" id="demo-ai-sum" tabindex="0">
+                    <div class="dfc-icon">🤖</div>
+                    <h4>Tóm tắt Slide AI</h4>
+                    <p>Upload slide → AI tóm tắt thành flashcard trong 30 giây</p>
+                    <button class="dfc-btn btn-demo-blue" id="btn-ai-sum">Thử ngay →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-purple" id="demo-quiz" tabindex="0">
+                    <div class="dfc-icon">✏️</div>
+                    <h4>Tạo Đề Ôn Thi</h4>
+                    <p>AI tự động sinh 20 câu trắc nghiệm từ tài liệu học phần</p>
+                    <button class="dfc-btn btn-demo-purple" id="btn-quiz">Tạo đề →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-teal" id="demo-tutor" tabindex="0">
+                    <div class="dfc-icon">👨‍🏫</div>
+                    <h4>Kết nối Gia sư</h4>
+                    <p>Tìm gia sư phù hợp theo môn, lịch, ngân sách trong 60 giây</p>
+                    <button class="dfc-btn btn-demo-teal" id="btn-tutor">Tìm gia sư →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-yellow" id="demo-schedule" tabindex="0">
+                    <div class="dfc-icon">📅</div>
+                    <h4>Lịch học Thông minh</h4>
+                    <p>AI sắp xếp lịch ôn thi tối ưu tránh xung đột thời khóa biểu</p>
+                    <button class="dfc-btn btn-demo-yellow" id="btn-schedule">Lên lịch →</button>
+                  </div>
+                </div>
+                <!-- AI Interaction Demo -->
+                <div class="demo-ai-box" id="demo-hoc-ai-box">
+                  <div class="demo-ai-header">
+                    <span>🤖 Trợ lý AI Student Life+</span>
+                    <span class="ai-status-dot"></span>
+                  </div>
+                  <div class="demo-ai-messages" id="hoc-ai-messages">
+                    <div class="ai-msg ai-msg-bot">Xin chào! Bạn muốn ôn thi môn nào hôm nay? Tôi có thể tạo đề trắc nghiệm ngay! 🎓</div>
+                  </div>
+                  <div class="demo-ai-input-row">
+                    <input type="text" class="demo-ai-input" id="hoc-ai-input" placeholder="Nhập môn học muốn ôn thi..." aria-label="Nhập câu hỏi cho AI"/>
+                    <button class="demo-ai-send" id="hoc-ai-send" aria-label="Gửi">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PANEL 2: LÀM ── -->
+          <div class="demo-panel" id="panel-lam" role="tabpanel" aria-labelledby="tab-lam" data-color="magenta" hidden>
+            <div class="demo-panel-inner">
+              <div class="demo-sidebar">
+                <div class="demo-search-bar">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                  <input type="text" placeholder="Tìm việc làm, thực tập..." id="lam-search" aria-label="Tìm kiếm việc làm" readonly/>
+                </div>
+                <div class="demo-filter-tags">
+                  <span class="filter-tag filter-active">Tất cả</span>
+                  <span class="filter-tag">Bán thời gian</span>
+                  <span class="filter-tag">Thực tập</span>
+                  <span class="filter-tag">Freelance</span>
+                </div>
+                <div class="demo-ai-suggest">
+                  <div class="ai-chip">
+                    <span>🛡️</span>
+                    <span>100% đã xác thực · Không lừa đảo</span>
+                  </div>
+                </div>
+                <ul class="demo-list">
+                  <li class="demo-list-item demo-list-item-active">
+                    <div class="dli-icon" style="background:rgba(236,72,153,0.15)">🏭</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Kỹ thuật viên KCN WHA</span>
+                      <span class="dli-meta">12tr-18tr/tháng · KCN WHA</span>
+                    </div>
+                    <span class="dli-badge badge-magenta">eKYC ✓</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(14,165,233,0.15)">💻</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Lập trình viên Part-time</span>
+                      <span class="dli-meta">100k-200k/h · Remote</span>
+                    </div>
+                    <span class="dli-badge badge-blue">Mới</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(234,179,8,0.15)">📊</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Thực tập Marketing VSIP</span>
+                      <span class="dli-meta">4tr/tháng · VSIP NA</span>
+                    </div>
+                    <span class="dli-badge badge-yellow">Hot</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(20,184,166,0.15)">🎨</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Thiết kế Freelance</span>
+                      <span class="dli-meta">Theo dự án · Canva, Figma</span>
+                    </div>
+                    <span class="dli-badge badge-teal">Linh hoạt</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="demo-main-panel">
+                <div class="demo-panel-header">
+                  <h3 class="demo-panel-title">💼 Sàn Việc Làm An Toàn</h3>
+                  <span class="demo-panel-subtitle">100% kiểm duyệt eKYC · AI chặn lừa đảo</span>
+                </div>
+                <div class="demo-feature-grid">
+                  <div class="demo-feat-card dfc-magenta" tabindex="0">
+                    <div class="dfc-icon">🔍</div>
+                    <h4>Tìm Việc Thông Minh</h4>
+                    <p>AI ghép việc làm phù hợp với kỹ năng, lịch học và vị trí của bạn</p>
+                    <button class="dfc-btn btn-demo-magenta">Tìm việc →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-blue" tabindex="0">
+                    <div class="dfc-icon">📋</div>
+                    <h4>Hồ sơ QR Code</h4>
+                    <p>Tạo CV số chuyên nghiệp tích hợp QR trong 5 phút</p>
+                    <button class="dfc-btn btn-demo-blue">Tạo CV →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-yellow" tabindex="0">
+                    <div class="dfc-icon">🏆</div>
+                    <h4>Kết nối FDI</h4>
+                    <p>Trực tiếp với KCN WHA, VSIP Nghệ An & 500+ doanh nghiệp</p>
+                    <button class="dfc-btn btn-demo-yellow">Khám phá →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-teal" tabindex="0">
+                    <div class="dfc-icon">🛡️</div>
+                    <h4>Báo cáo Lừa đảo</h4>
+                    <p>AI phát hiện tin tuyển dụng nghi ngờ, cảnh báo ngay lập tức</p>
+                    <button class="dfc-btn btn-demo-teal">Kiểm tra →</button>
+                  </div>
+                </div>
+                <div class="demo-stats-row">
+                  <div class="demo-stat-mini">
+                    <span class="dsm-num" data-target="500">0</span><span class="dsm-unit">+</span>
+                    <span class="dsm-label">Việc làm đã xác thực</span>
+                  </div>
+                  <div class="demo-stat-mini">
+                    <span class="dsm-num" data-target="100">0</span><span class="dsm-unit">%</span>
+                    <span class="dsm-label">Tỷ lệ eKYC thành công</span>
+                  </div>
+                  <div class="demo-stat-mini">
+                    <span class="dsm-num" data-target="0">0</span><span class="dsm-unit"></span>
+                    <span class="dsm-label">Vụ lừa đảo được ghi nhận</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PANEL 3: SỐNG ── -->
+          <div class="demo-panel" id="panel-song" role="tabpanel" aria-labelledby="tab-song" data-color="yellow" hidden>
+            <div class="demo-panel-inner">
+              <div class="demo-sidebar">
+                <div class="demo-search-bar">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                  <input type="text" placeholder="Tìm phòng trọ gần trường..." id="song-search" aria-label="Tìm kiếm phòng trọ" readonly/>
+                </div>
+                <div class="demo-filter-tags">
+                  <span class="filter-tag filter-active">Tất cả</span>
+                  <span class="filter-tag">Dưới 2tr</span>
+                  <span class="filter-tag">Có WC riêng</span>
+                  <span class="filter-tag">Gần ĐH Vinh</span>
+                </div>
+                <div class="demo-ai-suggest">
+                  <div class="ai-chip">
+                    <span>✅</span>
+                    <span>Đã xác thực thực địa · Virtual 360°</span>
+                  </div>
+                </div>
+                <ul class="demo-list">
+                  <li class="demo-list-item demo-list-item-active">
+                    <div class="dli-icon" style="background:rgba(234,179,8,0.15)">🏠</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Phòng đơn P.Hưng Dũng</span>
+                      <span class="dli-meta">1.8tr/tháng · 500m ĐH Vinh</span>
+                    </div>
+                    <span class="dli-badge badge-yellow">✓ Xác thực</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(14,165,233,0.15)">🏢</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Phòng ghép 2 người</span>
+                      <span class="dli-meta">1.2tr/người · P.Đội Cung</span>
+                    </div>
+                    <span class="dli-badge badge-blue">360° Tour</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(20,184,166,0.15)">🏡</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Studio đầy đủ nội thất</span>
+                      <span class="dli-meta">2.5tr/tháng · Gần bệnh viện</span>
+                    </div>
+                    <span class="dli-badge badge-teal">Còn phòng</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="demo-main-panel">
+                <div class="demo-panel-header">
+                  <h3 class="demo-panel-title">🏡 Bản đồ Nhà trọ An toàn</h3>
+                  <span class="demo-panel-subtitle">Xác thực 100% thực địa · Đánh giá 2 chiều</span>
+                </div>
+                <!-- Fake Map Preview -->
+                <div class="demo-map-preview" id="demo-map">
+                  <div class="map-bg-grid"></div>
+                  <div class="map-pin mp-1" style="top:35%;left:45%">
+                    <div class="map-pin-dot" style="background:var(--cyber-blue)"></div>
+                    <div class="map-pin-label">1.8tr ✓</div>
+                  </div>
+                  <div class="map-pin mp-2" style="top:55%;left:30%">
+                    <div class="map-pin-dot" style="background:var(--magenta)"></div>
+                    <div class="map-pin-label">1.2tr ✓</div>
+                  </div>
+                  <div class="map-pin mp-3" style="top:25%;left:62%">
+                    <div class="map-pin-dot" style="background:var(--yellow-bright)"></div>
+                    <div class="map-pin-label">2.5tr ✓</div>
+                  </div>
+                  <div class="map-pin mp-4" style="top:65%;left:55%">
+                    <div class="map-pin-dot" style="background:var(--teal)"></div>
+                    <div class="map-pin-label">1.5tr ✓</div>
+                  </div>
+                  <div class="map-center-marker">🎓 ĐH Vinh</div>
+                  <div class="map-legend">
+                    <span>🔵 Đã xác thực</span>
+                    <span>🟡 Đang xem xét</span>
+                  </div>
+                </div>
+                <div class="demo-stats-row" style="margin-top:16px">
+                  <div class="demo-stat-mini">
+                    <span class="dsm-num" data-target="1200">0</span><span class="dsm-unit">+</span>
+                    <span class="dsm-label">Phòng trọ xác thực</span>
+                  </div>
+                  <div class="demo-stat-mini">
+                    <span class="dsm-num" data-target="4">0</span><span class="dsm-unit">.8★</span>
+                    <span class="dsm-label">Đánh giá trung bình</span>
+                  </div>
+                  <div class="demo-stat-mini">
+                    <span class="dsm-num" data-target="360">0</span><span class="dsm-unit">°</span>
+                    <span class="dsm-label">Virtual Tour có sẵn</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PANEL 4: KHỎE ── -->
+          <div class="demo-panel" id="panel-khoe" role="tabpanel" aria-labelledby="tab-khoe" data-color="teal" hidden>
+            <div class="demo-panel-inner">
+              <div class="demo-sidebar">
+                <div class="demo-search-bar">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                  <input type="text" placeholder="Tìm gym, bác sĩ tư vấn..." id="khoe-search" aria-label="Tìm kiếm dịch vụ sức khỏe" readonly/>
+                </div>
+                <div class="demo-filter-tags">
+                  <span class="filter-tag filter-active">Tất cả</span>
+                  <span class="filter-tag">Tâm lý</span>
+                  <span class="filter-tag">Thể thao</span>
+                  <span class="filter-tag">Khám bệnh</span>
+                </div>
+                <div class="demo-ai-suggest">
+                  <div class="ai-chip">
+                    <span>💚</span>
+                    <span>Theo dõi sức khỏe hàng ngày</span>
+                  </div>
+                </div>
+                <ul class="demo-list">
+                  <li class="demo-list-item demo-list-item-active">
+                    <div class="dli-icon" style="background:rgba(20,184,166,0.15)">🧠</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Bài test Tâm lý Stress</span>
+                      <span class="dli-meta">PHQ-9 · GAD-7 · 5 phút</span>
+                    </div>
+                    <span class="dli-badge badge-teal">Free</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(14,165,233,0.15)">🏋️</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Gym gần ĐH Vinh</span>
+                      <span class="dli-meta">200k/tháng · Còn chỗ</span>
+                    </div>
+                    <span class="dli-badge badge-blue">Ưu đãi SV</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(236,72,153,0.15)">🩺</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Khám sức khỏe định kỳ</span>
+                      <span class="dli-meta">BV Hữu Nghị · Đặt online</span>
+                    </div>
+                    <span class="dli-badge badge-magenta">Hôm nay</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="demo-main-panel">
+                <div class="demo-panel-header">
+                  <h3 class="demo-panel-title">🏃 Sức khỏe Toàn diện</h3>
+                  <span class="demo-panel-subtitle">Tâm lý · Thể chất · Y tế trực tuyến</span>
+                </div>
+                <!-- Wellness Tracker -->
+                <div class="demo-wellness">
+                  <div class="wellness-header">
+                    <span class="wellness-title">📊 Chỉ số hôm nay của bạn</span>
+                    <span class="wellness-date" id="wellness-date-display"></span>
+                  </div>
+                  <div class="wellness-metrics">
+                    <div class="wellness-metric">
+                      <div class="wm-ring-wrap">
+                        <svg class="wm-ring" viewBox="0 0 60 60">
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"/>
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="var(--teal)" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="38" transform="rotate(-90 30 30)" class="wm-progress"/>
+                        </svg>
+                        <span class="wm-value">75%</span>
+                      </div>
+                      <span class="wm-label">Tinh thần</span>
+                    </div>
+                    <div class="wellness-metric">
+                      <div class="wm-ring-wrap">
+                        <svg class="wm-ring" viewBox="0 0 60 60">
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"/>
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="var(--cyber-blue)" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="60" transform="rotate(-90 30 30)" class="wm-progress"/>
+                        </svg>
+                        <span class="wm-value">60%</span>
+                      </div>
+                      <span class="wm-label">Vận động</span>
+                    </div>
+                    <div class="wellness-metric">
+                      <div class="wm-ring-wrap">
+                        <svg class="wm-ring" viewBox="0 0 60 60">
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"/>
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="var(--magenta)" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="23" transform="rotate(-90 30 30)" class="wm-progress"/>
+                        </svg>
+                        <span class="wm-value">85%</span>
+                      </div>
+                      <span class="wm-label">Giấc ngủ</span>
+                    </div>
+                    <div class="wellness-metric">
+                      <div class="wm-ring-wrap">
+                        <svg class="wm-ring" viewBox="0 0 60 60">
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"/>
+                          <circle cx="30" cy="30" r="24" fill="none" stroke="var(--yellow-bright)" stroke-width="6" stroke-linecap="round" stroke-dasharray="150.8" stroke-dashoffset="75" transform="rotate(-90 30 30)" class="wm-progress"/>
+                        </svg>
+                        <span class="wm-value">50%</span>
+                      </div>
+                      <span class="wm-label">Dinh dưỡng</span>
+                    </div>
+                  </div>
+                  <button class="dfc-btn btn-demo-teal" id="btn-stress-test" style="width:100%;margin-top:12px">🧠 Làm bài Test Tâm lý Ngay →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── PANEL 5: NGHỆ ── -->
+          <div class="demo-panel" id="panel-nghe" role="tabpanel" aria-labelledby="tab-nghe" data-color="purple" hidden>
+            <div class="demo-panel-inner">
+              <div class="demo-sidebar">
+                <div class="demo-search-bar">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                  <input type="text" placeholder="Tìm sự kiện, CLB, di sản..." id="nghe-search" aria-label="Tìm kiếm văn hóa nghệ thuật" readonly/>
+                </div>
+                <div class="demo-filter-tags">
+                  <span class="filter-tag filter-active">Tất cả</span>
+                  <span class="filter-tag">Sự kiện</span>
+                  <span class="filter-tag">Câu lạc bộ</span>
+                  <span class="filter-tag">Di sản số</span>
+                  <span class="filter-tag">Phượt</span>
+                </div>
+                <div class="demo-ai-suggest">
+                  <div class="ai-chip">
+                    <span>🏛️</span>
+                    <span>Bảo tàng số Nghệ An · Ví Giặm AI</span>
+                  </div>
+                </div>
+                <ul class="demo-list">
+                  <li class="demo-list-item demo-list-item-active">
+                    <div class="dli-icon" style="background:rgba(139,92,246,0.15)">🎭</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Festival Dân ca Ví Giặm</span>
+                      <span class="dli-meta">15/08/2026 · Quảng trường HCM</span>
+                    </div>
+                    <span class="dli-badge badge-purple">Sắp diễn ra</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(236,72,153,0.15)">🎨</div>
+                    <div class="dli-info">
+                      <span class="dli-title">CLB Thiết kế Sáng tạo</span>
+                      <span class="dli-meta">ĐH Vinh · 120 thành viên</span>
+                    </div>
+                    <span class="dli-badge badge-magenta">Tuyển thành viên</span>
+                  </li>
+                  <li class="demo-list-item">
+                    <div class="dli-icon" style="background:rgba(234,179,8,0.15)">🏔️</div>
+                    <div class="dli-info">
+                      <span class="dli-title">Phượt Đỉnh Puxailaileng</span>
+                      <span class="dli-meta">20-22/09 · 15 người</span>
+                    </div>
+                    <span class="dli-badge badge-yellow">Còn 3 chỗ</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="demo-main-panel">
+                <div class="demo-panel-header">
+                  <h3 class="demo-panel-title">🎨 Hệ sinh thái Văn hóa Số</h3>
+                  <span class="demo-panel-subtitle">Di sản · Sáng tạo · Cộng đồng Nghệ An</span>
+                </div>
+                <div class="demo-feature-grid">
+                  <div class="demo-feat-card dfc-purple" tabindex="0">
+                    <div class="dfc-icon">🏛️</div>
+                    <h4>Bảo tàng Số</h4>
+                    <p>Khám phá di sản Ví Giặm, Kim Liên qua AR/VR tương tác</p>
+                    <button class="dfc-btn btn-demo-purple">Tham quan →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-magenta" tabindex="0">
+                    <div class="dfc-icon">🎨</div>
+                    <h4>Chợ Sáng tạo</h4>
+                    <p>Bán ảnh thiết kế, artwork số, kiếm thu nhập từ đam mê</p>
+                    <button class="dfc-btn btn-demo-magenta">Bán tác phẩm →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-yellow" tabindex="0">
+                    <div class="dfc-icon">🗺️</div>
+                    <h4>Lịch trình Phượt AI</h4>
+                    <p>AI lên kế hoạch chuyến đi trọn gói quanh Nghệ An</p>
+                    <button class="dfc-btn btn-demo-yellow">Lên kế hoạch →</button>
+                  </div>
+                  <div class="demo-feat-card dfc-teal" tabindex="0">
+                    <div class="dfc-icon">🎵</div>
+                    <h4>Lớp học Dân ca AI</h4>
+                    <p>AI dạy hát Ví Giặm tương tác, nhận diện giọng hát theo thời gian thực</p>
+                    <button class="dfc-btn btn-demo-teal">Học ngay →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end demo-content-area -->
+
+        <!-- Window Footer / Action Bar -->
+        <div class="demo-footer-bar">
+          <div class="demo-footer-left">
+            <span class="demo-live-dot"></span>
+            <span>Phiên bản Demo · Dữ liệu mẫu minh họa</span>
+          </div>
+        </div>
+      </div><!-- end demo-window -->
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section" id="cta">
+    <div class="cta-bg">
+      <div class="cta-orb cta-orb-1"></div>
+      <div class="cta-orb cta-orb-2"></div>
+    </div>
+    <div class="container">
+      <div class="cta-content">
+        <div class="cta-badge">🚀 Đăng ký sớm — Nhận ưu đãi độc quyền</div>
+        <h2 class="cta-title">Sẵn Sàng Nâng Tầm<br/>Cuộc Sống Sinh Viên<br/><span class="gradient-text-cta">Cùng Student Life+?</span></h2>
+        <p class="cta-desc">Đăng ký ngay để nhận thông báo ra mắt sớm nhất và các ưu đãi đặc biệt dành cho người dùng đầu tiên.</p>
+        <div class="cta-forms-wrapper">
+          <div class="cta-form-card" id="cta-student-form">
+            <div class="form-card-header">
+              <span class="form-icon">🎓</span>
+              <div>
+                <h3>Dành cho Sinh viên</h3>
+                <p>Nhận thông báo khi app ra mắt</p>
+              </div>
+            </div>
+            <form class="cta-form" id="student-register-form" novalidate>
+              <div class="form-group">
+                <label for="student-name">Họ và tên</label>
+                <input type="text" id="student-name" name="student-name" placeholder="Nguyễn Văn A" required autocomplete="name"/>
+              </div>
+              <div class="form-group">
+                <label for="student-email">Email sinh viên</label>
+                <input type="email" id="student-email" name="student-email" placeholder="email@student.edu.vn" required autocomplete="email"/>
+              </div>
+              <div class="form-group">
+                <label for="student-school">Trường đang theo học</label>
+                <select id="student-school" name="student-school">
+                  <option value="">-- Chọn trường --</option>
+                  <option></option>
+                  <option>ĐH Y khoa Vinh</option>
+                  <option>ĐH Kinh tế Nghệ An</option>
+                  <option>CĐ Sư phạm Nghệ An</option>
+                  <option>CĐ Việt - Hàn Nghệ An</option>
+                  <option>Trường khác</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full" id="student-submit-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Đăng Ký Nhận Thông Báo
+              </button>
+            </form>
+          </div>
+
+          <div class="cta-form-divider">hoặc</div>
+
+          <div class="cta-form-card" id="cta-business-form">
+            <div class="form-card-header">
+              <span class="form-icon">🏢</span>
+              <div>
+                <h3>Doanh Nghiệp & Chủ Trọ</h3>
+                <p>Đăng ký đối tác hệ sinh thái</p>
+              </div>
+            </div>
+            <form class="cta-form" id="business-register-form" novalidate>
+              <div class="form-group">
+                <label for="biz-name">Tên đơn vị / Cá nhân</label>
+                <input type="text" id="biz-name" name="biz-name" placeholder="Công ty TNHH / Anh Nguyễn Văn B" required autocomplete="organization"/>
+              </div>
+              <div class="form-group">
+                <label for="biz-email">Email liên hệ</label>
+                <input type="email" id="biz-email" name="biz-email" placeholder="contact@company.com" required autocomplete="email"/>
+              </div>
+              <div class="form-group">
+                <label for="biz-type">Loại đối tác</label>
+                <select id="biz-type" name="biz-type">
+                  <option value="">-- Chọn loại --</option>
+                  <option>Doanh nghiệp tuyển dụng</option>
+                  <option>Chủ nhà trọ / Khu trọ</option>
+                  <option>Trung tâm giáo dục / Khóa học</option>
+                  <option>Doanh nghiệp F&B / Dịch vụ</option>
+                  <option>Nhà đầu tư / Cố vấn</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-outline-dark btn-full" id="biz-submit-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75M9 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Đăng Ký Hợp Tác Ngay
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="cta-success-message" id="cta-success" aria-live="polite" hidden>
+          <div class="success-icon">🎉</div>
+          <div>
+            <strong>Đăng ký thành công!</strong> Chúng tôi sẽ liên hệ với bạn sớm nhất.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo footer-logo">
+            <div class="logo-icon">
+              <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+                <defs>
+                  <linearGradient id="footerLogoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#0ea5e9"/>
+                    <stop offset="50%" stop-color="#8b5cf6"/>
+                    <stop offset="100%" stop-color="#ec4899"/>
+                  </linearGradient>
+                </defs>
+                <rect width="32" height="32" rx="8" fill="url(#footerLogoGrad)"/>
+                <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Inter" font-weight="900" font-size="14" fill="white">SL+</text>
+              </svg>
+            </div>
+            <span class="logo-text logo-text-light">Student<span class="logo-accent">Life+</span></span>
+          </a>
+          <p class="footer-tagline">Siêu ứng dụng AI đồng hành cùng sinh viên — Nghệ An & Toàn Quốc.</p>
+          <div class="footer-pillars">
+            <span>🎓 HỌC</span>
+            <span>💼 LÀM</span>
+            <span>🏠 SỐNG</span>
+            <span>🩺 KHỎE</span>
+            <span>🎨 NGHỆ</span>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <h4 class="footer-heading">Liên hệ chúng tôi</h4>
+          <ul class="contact-list">
+            <li class="contact-item" id="footer-company">
+              <div class="contact-icon">🏢</div>
+              <div>
+                <strong>Công ty TNHH Công nghệ số và Trí tuệ nhân tạo Nghệ An</strong>
+              </div>
+            </li>
+            <li class="contact-item" id="footer-address">
+              <div class="contact-icon">📍</div>
+              <div>Số 6 Trần Huy Liệu, phường Trường Vinh, tỉnh Nghệ An</div>
+            </li>
+            <li class="contact-item" id="footer-email">
+              <div class="contact-icon">📧</div>
+              <div>
+                <a href="mailto:phuongmai28012011@gmail.com" class="footer-link">phuongmai28012011@gmail.com</a>
+              </div>
+            </li>
+            <li class="contact-item" id="footer-phone">
+              <div class="contact-icon">📞</div>
+              <div>
+                <a href="tel:0368981729" class="footer-link">0368 981 729</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Khám phá</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#pillars" class="footer-nav-link">5 Trụ Cột</a></li>
+            <li><a href="#features" class="footer-nav-link">Công nghệ AI</a></li>
+            <li><a href="#partners" class="footer-nav-link">Đối Tác</a></li>
+            <li><a href="#team" class="footer-nav-link">Đội Ngũ</a></li>
+            <li><a href="#cta" class="footer-nav-link">Đăng Ký Sớm</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-col">
+          <h4 class="footer-heading">Cộng đồng</h4>
+          <ul class="footer-nav-list">
+            <li><a href="#" class="footer-nav-link" id="footer-facebook">Facebook</a></li>
+            <li><a href="#" class="footer-nav-link" id="footer-zalo">Zalo OA</a></li>
+            <li><a href="#" class="footer-nav-link" id="footer-tiktok">TikTok</a></li>
+            <li><a href="#" class="footer-nav-link" id="footer-youtube">YouTube</a></li>
+            <li><a href="#cta" class="footer-nav-link" id="footer-ambassador">Đại Sứ Campus</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 Student Life+ — Công ty TNHH Công nghệ số và Trí tuệ nhân tạo Nghệ An. Tất cả quyền được bảo lưu. Bảo hộ Nhãn hiệu & Bản quyền độc quyền.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">🏆 TECHFEST Nghệ An 2026</span>
+          <span class="footer-badge">🛡️ Bảo hộ IP</span>
+          <span class="footer-badge">🤖 AI-Powered</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Về đầu trang" title="Về đầu trang">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
